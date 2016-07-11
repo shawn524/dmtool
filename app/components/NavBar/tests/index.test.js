@@ -1,9 +1,9 @@
-import Test from '../index';
+import NavBar from '../index';
 
 import expect from 'expect';
 import { shallow } from 'enzyme';
 import React from 'react';
 
-describe('<Test />', () => {
+describe('<NavBar />', () => {
 
 });
