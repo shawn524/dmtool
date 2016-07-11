@@ -10,12 +10,13 @@
  */
 
 import React from 'react';
+import Test from 'components/Test/index.js';
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
-      <h1>This is the Homepage!</h1>
+      <Test />
     );
   }
 }
