@@ -15,6 +15,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import NavBar from 'components/NavBar/index.js'
+import Spells from 'components/Spells/index.js'
 
 // Needed for onTouchTap 
 // http://stackoverflow.com/a/34015469/988941 
@@ -24,9 +25,14 @@ injectTapEventPlugin();
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <MuiThemeProvider >
-        <NavBar />
-      </MuiThemeProvider>
+      <div>
+        <MuiThemeProvider >
+          <NavBar />
+        </MuiThemeProvider>
+        <MuiThemeProvider >
+          <Spells />
+        </MuiThemeProvider>
+      </div>
     );
   }
 }

@@ -39,9 +39,8 @@ export default class NavBar extends React.Component {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
-                  <MenuItem primaryText="Refresh" />
+                  <MenuItem primaryText="Settings" />
                   <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Sign out" />
                 </IconMenu>
                 }
                 />
