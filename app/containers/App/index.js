@@ -37,6 +37,9 @@ export default class App extends React.Component { // eslint-disable-line react/
         <MuiThemeProvider >
           <NavBar />
         </MuiThemeProvider>
+        <MuiThemeProvider >
+          {this.props.children}
+        </MuiThemeProvider>
       </div>
     );
   }
