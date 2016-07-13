@@ -13,6 +13,18 @@
 
 import React from 'react';
 
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import NavBar from 'components/NavBar/index.js'
+import Spells from 'components/Spells/index.js'
+
+// Needed for onTouchTap 
+// http://stackoverflow.com/a/34015469/988941 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -22,7 +34,9 @@ export default class App extends React.Component { // eslint-disable-line react/
   render() {
     return (
       <div>
-        {this.props.children}
+        <MuiThemeProvider >
+          <NavBar />
+        </MuiThemeProvider>
       </div>
     );
   }

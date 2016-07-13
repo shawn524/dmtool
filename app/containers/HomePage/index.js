@@ -17,21 +17,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import NavBar from 'components/NavBar/index.js'
 import Spells from 'components/Spells/index.js'
 
-// Needed for onTouchTap 
-// http://stackoverflow.com/a/34015469/988941 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
-        <MuiThemeProvider >
-          <NavBar />
-        </MuiThemeProvider>
-        <MuiThemeProvider >
-          <Spells />
-        </MuiThemeProvider>
       </div>
     );
   }

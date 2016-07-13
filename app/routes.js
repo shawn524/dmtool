@@ -34,7 +34,16 @@ export default function createRoutes() {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/spells',
+      name: 'spells',
+      getComponent(location, cb) {
+        System.import('components/Spells')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '*',
+
       name: 'notfound',
       getComponent(nextState, cb) {
         System.import('containers/NotFoundPage')

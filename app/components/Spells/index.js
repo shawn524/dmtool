@@ -6,7 +6,7 @@
 import SpellData from './spellData.json'
 import React from 'react';
 import styles from './styles.css';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import AutoComplete from 'material-ui/AutoComplete';
 import {List, ListItem} from 'material-ui/List';
