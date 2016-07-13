@@ -59,7 +59,7 @@ export default class NavBar extends React.Component {
             title="dmtools"
             iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}
             />
-          <MenuItem onTouchTap={this.handleClose} value={push('/spells')}>Spell Search</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} href='/spells' >Spell Search</MenuItem>
           <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
         </Drawer>
       </div>

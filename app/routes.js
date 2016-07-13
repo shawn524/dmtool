@@ -43,7 +43,6 @@ export default function createRoutes() {
       },
     }, {
       path: '*',
-
       name: 'notfound',
       getComponent(nextState, cb) {
         System.import('containers/NotFoundPage')

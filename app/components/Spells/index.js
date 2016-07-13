@@ -39,7 +39,7 @@ class Spells extends React.Component {
     return (
       <div>
       <AutoComplete
-        fullWidth             ={true}
+        fullWidth           ={true}
         floatingLabelText   ="Spell Search"
         filter              ={AutoComplete.caseInsensitiveFilter}
         openOnFocus         ={true}
