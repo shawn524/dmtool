@@ -42,6 +42,14 @@ export default function createRoutes() {
           .catch(errorLoading);
       },
     }, {
+      path: '/encounter',
+      name: 'encounter',
+      getComponent(location, cb) {
+        System.import('components/Encounter')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
