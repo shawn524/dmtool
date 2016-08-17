@@ -7,10 +7,22 @@
 import React from 'react';
 import styles from './styles.css';
 
-import { Chip, Divider, Paper, TextField, RaisedButton, Table } from 'material-ui'
+import { Divider, TextField, RaisedButton } from 'material-ui'
 import AddBox from 'material-ui/svg-icons/content/add';
 
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
+const  SortableItem = SortableElement(({value}) => <li>{value}</li>);
+
+const  SortableList = SortableContainer(({items}) => {
+  return (
+    <ul>
+      {items.map((value, index) =>
+                 <SortableItem key={`item-${index}`} index={index} value={value} />
+                 )}
+                 </ul>
+  );
+});
 
 class Encounter extends React.Component {
   constructor(props) {
@@ -18,6 +30,7 @@ class Encounter extends React.Component {
     this.state = {
       name: '',
       initiative: '',
+      items: ["one","two"],
       chipData: []
     };
     this.styles = {
@@ -31,58 +44,44 @@ class Encounter extends React.Component {
     };
   }
 
-  handleRequestDelete = (key) => {
-    if (key === 3) {
-      alert('Why would you want to delete React?! :)');
-    }
-
-    this.chipData = this.state.chipData;
-    const chipToDelete = this.chipData.map((chip) => chip.key).indexOf(key);
-    this.chipData.splice(chipToDelete, 1);
-    this.setState({chipData: this.chipData});
-  }
-
   handleChange = (event) => {
     this.setState({
       value: event.target.value,
     });
   }
 
-  renderChip(data) {
-    return (
-      <Chip
-        key={data.key}
-        onRequestDelete={() => this.handleRequestDelete(data.key)}
-        style={this.styles.chip}
-        >
-          {data.label}
-      </Chip>
-    );
-  }
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState({
+      items: arrayMove(this.state.items, oldIndex, newIndex)
+    });
+  };
 
   render() {
+
     return (
-      <div className={styles.encounter}>
-      <TextField
-        id="text-field-controlled"
-        value={this.state.name}
-        onChange={this.handleChange}
-        hintText="Name"
-        floatingLabelText="Character"
-      />
-      <TextField
-        id="text-field-controlled"
-        value={this.state.initiative}
-        onChange={this.handleChange}
-        hintText="Number"
-        floatingLabelText="Initiative"
-      />
-      <RaisedButton
-        primary={true}
-        icon={<AddBox />}
-      />
-        {this.state.chipData.map(this.renderChip, this)}
-      </div>
+      <div>
+        <div className={styles.encounter}>
+          <TextField
+            id="text-field-controlled"
+            value={this.state.name}
+            onChange={this.handleChange}
+            hintText="Name"
+            floatingLabelText="Character"
+          />
+          <TextField
+            id="text-field-controlled"
+            value={this.state.initiative}
+            onChange={this.handleChange}
+            hintText="Number"
+            floatingLabelText="Initiative"
+          />
+          <RaisedButton
+            primary={true}
+            icon={<AddBox />}
+            />
+          </div>
+          <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+        </div>
     );
   }
 }
