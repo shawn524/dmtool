@@ -7,12 +7,13 @@
 import React from 'react';
 import styles from './styles.css';
 
-import { Divider, TextField, RaisedButton, List, ListItem } from 'material-ui'
+import { Divider, TextField, RaisedButton, List, ListItem, Avatar } from 'material-ui';
 import AddBox from 'material-ui/svg-icons/content/add';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
-const  SortableItem = SortableElement(({value}) => <ListItem>{value.name}</ListItem>);
+const  SortableItem = SortableElement(({value}) => <ListItem  primaryText={value.name} leftAvatar={<Avatar>{value.initiative}</Avatar>} />);
 
 const  SortableList = SortableContainer(({items}) => {
   return (
@@ -43,12 +44,17 @@ class Encounter extends React.Component {
     };
   };
 
-
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
       items: arrayMove(this.state.items, oldIndex, newIndex)
     });
   };
+
+  clearList = () => {
+    this.setState({
+      items: []
+    })
+  }
 
   handleAdd = ()  => {
     var newList = this.state.items.slice();
@@ -100,9 +106,11 @@ class Encounter extends React.Component {
             onTouchTap={this.handleAdd}
             />
           </div>
+          <Divider />
           <List>
             <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
           </List>
+          <RaisedButton onTouchTap={this.clearList}>Clear</RaisedButton>
         </div>
     );
   }

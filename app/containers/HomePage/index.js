@@ -10,13 +10,6 @@
  */
 import React from 'react';
 
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import NavBar from 'components/NavBar/index.js'
-import Spells from 'components/Spells/index.js'
-
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
