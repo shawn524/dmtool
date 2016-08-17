@@ -7,12 +7,12 @@
 import React from 'react';
 import styles from './styles.css';
 
-import { Divider, TextField, RaisedButton } from 'material-ui'
+import { Divider, TextField, RaisedButton, List, ListItem } from 'material-ui'
 import AddBox from 'material-ui/svg-icons/content/add';
 
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
-const  SortableItem = SortableElement(({value}) => <li>{value}</li>);
+const  SortableItem = SortableElement(({value}) => <ListItem>{value.name}</ListItem>);
 
 const  SortableList = SortableContainer(({items}) => {
   return (
@@ -30,25 +30,19 @@ class Encounter extends React.Component {
     this.state = {
       name: '',
       initiative: '',
-      items: ["one","two"],
-      chipData: []
+      items: [
+        {"name":"Dan", "initiative":"12"},
+        {"name":"Ted", "initiative":"14"}
+      ]
     };
     this.styles = {
-      chip: {
-        margin: 4,
-      },
       wrapper: {
         display: 'flex',
         flexWrap: 'wrap',
       },
     };
-  }
+  };
 
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  }
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
@@ -56,31 +50,59 @@ class Encounter extends React.Component {
     });
   };
 
-  render() {
+  handleAdd = ()  => {
+    var newList = this.state.items.slice();
+    newList.push({ "name": this.state.name, "initiative": this.state.initiative });
+    this.setState({
+      items: newList,
+      name: "",
+      initiative: ""
+    })
+  }
 
+  handleEnter = (event) => {
+    /* Can't understand how to just call handleAdd */
+    /* Why doesn't this.handleAdd just work? */
+    if(event.key == "Enter") {
+      var newList = this.state.items.slice();
+      newList.push({ "name": this.state.name, "initiative": this.state.initiative });
+      this.setState({
+        items: newList,
+        name: "",
+        initiative: ""
+      })
+    }
+  }
+
+  render() {
     return (
       <div>
         <div className={styles.encounter}>
           <TextField
-            id="text-field-controlled"
+            id="text-field-name"
             value={this.state.name}
-            onChange={this.handleChange}
+            onChange={e => this.setState({name: e.target.value})}
+            onKeyDown={(e) => this.handleEnter(e)}
             hintText="Name"
             floatingLabelText="Character"
           />
           <TextField
-            id="text-field-controlled"
+            id="text-field-initiative"
             value={this.state.initiative}
-            onChange={this.handleChange}
+            onChange={e => this.setState({initiative: e.target.value})}
+            onKeyDown={(e) => this.handleEnter(e)}
             hintText="Number"
             floatingLabelText="Initiative"
           />
           <RaisedButton
             primary={true}
             icon={<AddBox />}
+            onTouchTap={this.handleAdd}
             />
           </div>
-          <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+          <List>
+            <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+          </List>
         </div>
     );
   }
