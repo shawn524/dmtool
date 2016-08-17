@@ -59,6 +59,9 @@ class Encounter extends React.Component {
   handleAdd = ()  => {
     var newList = this.state.items.slice();
     newList.push({ "name": this.state.name, "initiative": this.state.initiative });
+    newList = newList.sort(function(a,b) {
+      return parseInt(a.initiative) - parseInt(b.initiative)
+    })
     this.setState({
       items: newList,
       name: "",
@@ -69,6 +72,8 @@ class Encounter extends React.Component {
   handleEnter = (event) => {
     /* Can't understand how to just call handleAdd */
     /* Why doesn't this.handleAdd just work? */
+    /* Removed this from TextFiend for now */
+    /*    onKeyDown={(e) => this.handleEnter(e)} */
     if(event.key == "Enter") {
       var newList = this.state.items.slice();
       newList.push({ "name": this.state.name, "initiative": this.state.initiative });
@@ -96,7 +101,6 @@ class Encounter extends React.Component {
             id="text-field-initiative"
             value={this.state.initiative}
             onChange={e => this.setState({initiative: e.target.value})}
-            onKeyDown={(e) => this.handleEnter(e)}
             hintText="Number"
             floatingLabelText="Initiative"
           />
@@ -104,6 +108,7 @@ class Encounter extends React.Component {
             primary={true}
             icon={<AddBox />}
             onTouchTap={this.handleAdd}
+            disabled={this.state.name.length > 1 && (this.state.initiative.length > 1 && this.state.initiative.length <= 2) ? false : true}
             />
           </div>
           <Divider />
